@@ -12,11 +12,27 @@ GD/GD32E51x/Source/system_gd32e51x.c
 path = [
     cwd + '/GD/GD32E51x/Include',
     cwd,]
-
-if rtconfig.PLATFORM in ['armcc', 'armclang']:
-    src += ['GD/GD32E51x/Source/ARM/startup_gd32e51x_hd.s']
-elif rtconfig.PLATFORM in ['iccarm']:
-    src += ['GD/GD32E51x/Source/IAR/startup_gd32e51x_hd.s']
+if GetDepend(['GD32E513xx']):
+    if rtconfig.PLATFORM in ['armcc', 'armclang']:
+        src += ['GD/GD32E51x/Source/ARM/startup_gd32e51x_hd.s']
+    elif rtconfig.PLATFORM in ['iccarm']:
+        src += ['GD/GD32E51x/Source/IAR/startup_gd32e51x_hd.s']
+    elif rtconfig.PLATFORM in ['gcc']:
+        src += ['GD/GD32E51x/Source/GCC/startup_gd32e51x_hd.s']
+elif GetDepend(['GD32E517xx']) or GetDepend(['GD32E518xx']):
+    if rtconfig.PLATFORM in ['armcc', 'armclang']:
+        src += ['GD/GD32E51x/Source/ARM/startup_gd32e51x_cl.s']
+    elif rtconfig.PLATFORM in ['iccarm']:
+        src += ['GD/GD32E51x/Source/IAR/startup_gd32e51x_cl.s']
+    elif rtconfig.PLATFORM in ['gcc']:
+        src += ['GD/GD32E51x/Source/GCC/startup_gd32e51x_cl.s']
+elif GetDepend(['GD32EPRTxx']):
+    if rtconfig.PLATFORM in ['armcc', 'armclang']:
+        src += ['GD/GD32E51x/Source/ARM/startup_gd32eprtxxa.s']
+    elif rtconfig.PLATFORM in ['iccarm']:
+        src += ['GD/GD32E51x/Source/IAR/startup_gd32eprtxxa.s']
+    elif rtconfig.PLATFORM in ['gcc']:
+        src += ['GD/GD32E51x/Source/GCC/startup_gd32eprtxxa.s']
 
 CPPDEFINES = ['USE_STDPERIPH_DRIVER']
 
