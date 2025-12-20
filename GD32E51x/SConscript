@@ -17,6 +17,8 @@ if rtconfig.PLATFORM in ['armcc', 'armclang']:
     src += ['GD/GD32E51x/Source/ARM/startup_gd32e51x_hd.s']
 elif rtconfig.PLATFORM in ['iccarm']:
     src += ['GD/GD32E51x/Source/IAR/startup_gd32e51x_hd.s']
+elif rtconfig.PLATFORM in ['gcc']:
+    src += ['GD/GD32E51x/Source/GCC/startup_gd32e51x_hd.s']
 
 CPPDEFINES = ['USE_STDPERIPH_DRIVER']
 
